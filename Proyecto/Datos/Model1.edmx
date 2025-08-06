@@ -1,0 +1,1077 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AgenciaBusesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asientos">
+          <Key>
+            <PropertyRef Name="Id_Asiento" />
+          </Key>
+          <Property Name="Id_Asiento" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Numero" Type="int" Nullable="false" />
+          <Property Name="Id_Bus" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Asignaciones">
+          <Key>
+            <PropertyRef Name="Id_Asignacion" />
+          </Key>
+          <Property Name="Id_Asignacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Conductor" Type="int" Nullable="false" />
+          <Property Name="Id_Bus" Type="int" Nullable="false" />
+          <Property Name="Fecha_Asignacion" Type="date" Nullable="false" />
+          <Property Name="Turno" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Observaciones" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Boletos">
+          <Key>
+            <PropertyRef Name="Id_Boleto" />
+          </Key>
+          <Property Name="Id_Boleto" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Id_Viaje" Type="int" Nullable="false" />
+          <Property Name="Id_Pasajero" Type="int" Nullable="false" />
+          <Property Name="Id_Asiento" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Fecha_Compra" Type="date" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Buses">
+          <Key>
+            <PropertyRef Name="Id_Bus" />
+          </Key>
+          <Property Name="Id_Bus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Placa" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="Marca" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Modelo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Capacidad" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Conductores">
+          <Key>
+            <PropertyRef Name="Id_Conductor" />
+          </Key>
+          <Property Name="Id_Conductor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Documento_Identidad" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="Licencia" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mantenimientos">
+          <Key>
+            <PropertyRef Name="Id_Mantenimiento" />
+          </Key>
+          <Property Name="Id_Mantenimiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Bus" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="date" Nullable="false" />
+          <Property Name="Descripcion" Type="text" Nullable="false" />
+          <Property Name="Costo" Type="decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="EmpresaResponsable" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pasajeros">
+          <Key>
+            <PropertyRef Name="Id_Pasajero" />
+          </Key>
+          <Property Name="Id_Pasajero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Documento_Identidad" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rutas">
+          <Key>
+            <PropertyRef Name="Id_Ruta" />
+          </Key>
+          <Property Name="Id_Ruta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Origen" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Destino" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Distancia_Km" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Duracion_Estimada" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Viajes">
+          <Key>
+            <PropertyRef Name="Id_Viaje" />
+          </Key>
+          <Property Name="Id_Viaje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Bus" Type="int" Nullable="false" />
+          <Property Name="Id_Conductor" Type="int" Nullable="false" />
+          <Property Name="Id_Ruta" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="20" />
+          <Property Name="Fecha_Salida" Type="date" />
+          <Property Name="Fecha_LLegada" Type="date" />
+        </EntityType>
+        <Association Name="FK__Asientos__Id_Bus__4CA06362">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Asientos" Type="Self.Asientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Asientos">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asientos__Id_Bus__5FB337D6">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Asientos" Type="Self.Asientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Asientos">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__Id_Bu__4D94879B">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__Id_Bu__60A75C0F">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__Id_Co__4E88ABD4">
+          <End Role="Conductores" Type="Self.Conductores" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conductores">
+              <PropertyRef Name="Id_Conductor" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="Id_Conductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__Id_Co__619B8048">
+          <End Role="Conductores" Type="Self.Conductores" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conductores">
+              <PropertyRef Name="Id_Conductor" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="Id_Conductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Asie__4F7CD00D">
+          <End Role="Asientos" Type="Self.Asientos" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asientos">
+              <PropertyRef Name="Id_Asiento" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Asiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Asie__628FA481">
+          <End Role="Asientos" Type="Self.Asientos" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asientos">
+              <PropertyRef Name="Id_Asiento" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Asiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Pasa__5070F446">
+          <End Role="Pasajeros" Type="Self.Pasajeros" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pasajeros">
+              <PropertyRef Name="Id_Pasajero" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Pasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Pasa__6383C8BA">
+          <End Role="Pasajeros" Type="Self.Pasajeros" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pasajeros">
+              <PropertyRef Name="Id_Pasajero" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Pasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Viaj__5165187F">
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Viajes">
+              <PropertyRef Name="Id_Viaje" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Viaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Viaj__6477ECF3">
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Viajes">
+              <PropertyRef Name="Id_Viaje" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Viaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mantenimi__Id_Bu__52593CB8">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Mantenimientos" Type="Self.Mantenimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Mantenimientos">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mantenimi__Id_Bu__656C112C">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Mantenimientos" Type="Self.Mantenimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Mantenimientos">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Bus__534D60F1">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Bus__66603565">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Condu__5441852A">
+          <End Role="Conductores" Type="Self.Conductores" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conductores">
+              <PropertyRef Name="Id_Conductor" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Conductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Condu__6754599E">
+          <End Role="Conductores" Type="Self.Conductores" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conductores">
+              <PropertyRef Name="Id_Conductor" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Conductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Ruta__5535A963">
+          <End Role="Rutas" Type="Self.Rutas" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rutas">
+              <PropertyRef Name="Id_Ruta" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Ruta__68487DD7">
+          <End Role="Rutas" Type="Self.Rutas" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rutas">
+              <PropertyRef Name="Id_Ruta" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AgenciaBusesModelStoreContainer">
+          <EntitySet Name="Asientos" EntityType="Self.Asientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asignaciones" EntityType="Self.Asignaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Boletos" EntityType="Self.Boletos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buses" EntityType="Self.Buses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conductores" EntityType="Self.Conductores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mantenimientos" EntityType="Self.Mantenimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pasajeros" EntityType="Self.Pasajeros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rutas" EntityType="Self.Rutas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Viajes" EntityType="Self.Viajes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Asientos__Id_Bus__4CA06362" Association="Self.FK__Asientos__Id_Bus__4CA06362">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Asientos" EntitySet="Asientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asientos__Id_Bus__5FB337D6" Association="Self.FK__Asientos__Id_Bus__5FB337D6">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Asientos" EntitySet="Asientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__Id_Bu__4D94879B" Association="Self.FK__Asignacio__Id_Bu__4D94879B">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__Id_Bu__60A75C0F" Association="Self.FK__Asignacio__Id_Bu__60A75C0F">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__Id_Co__4E88ABD4" Association="Self.FK__Asignacio__Id_Co__4E88ABD4">
+            <End Role="Conductores" EntitySet="Conductores" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__Id_Co__619B8048" Association="Self.FK__Asignacio__Id_Co__619B8048">
+            <End Role="Conductores" EntitySet="Conductores" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Asie__4F7CD00D" Association="Self.FK__Boletos__Id_Asie__4F7CD00D">
+            <End Role="Asientos" EntitySet="Asientos" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Asie__628FA481" Association="Self.FK__Boletos__Id_Asie__628FA481">
+            <End Role="Asientos" EntitySet="Asientos" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Pasa__5070F446" Association="Self.FK__Boletos__Id_Pasa__5070F446">
+            <End Role="Pasajeros" EntitySet="Pasajeros" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Pasa__6383C8BA" Association="Self.FK__Boletos__Id_Pasa__6383C8BA">
+            <End Role="Pasajeros" EntitySet="Pasajeros" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Viaj__5165187F" Association="Self.FK__Boletos__Id_Viaj__5165187F">
+            <End Role="Viajes" EntitySet="Viajes" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Viaj__6477ECF3" Association="Self.FK__Boletos__Id_Viaj__6477ECF3">
+            <End Role="Viajes" EntitySet="Viajes" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mantenimi__Id_Bu__52593CB8" Association="Self.FK__Mantenimi__Id_Bu__52593CB8">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Mantenimientos" EntitySet="Mantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mantenimi__Id_Bu__656C112C" Association="Self.FK__Mantenimi__Id_Bu__656C112C">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Mantenimientos" EntitySet="Mantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Bus__534D60F1" Association="Self.FK__Viajes__Id_Bus__534D60F1">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Bus__66603565" Association="Self.FK__Viajes__Id_Bus__66603565">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Condu__5441852A" Association="Self.FK__Viajes__Id_Condu__5441852A">
+            <End Role="Conductores" EntitySet="Conductores" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Condu__6754599E" Association="Self.FK__Viajes__Id_Condu__6754599E">
+            <End Role="Conductores" EntitySet="Conductores" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Ruta__5535A963" Association="Self.FK__Viajes__Id_Ruta__5535A963">
+            <End Role="Rutas" EntitySet="Rutas" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Ruta__68487DD7" Association="Self.FK__Viajes__Id_Ruta__68487DD7">
+            <End Role="Rutas" EntitySet="Rutas" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AgenciaBusesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asientos">
+          <Key>
+            <PropertyRef Name="Id_Asiento" />
+          </Key>
+          <Property Name="Id_Asiento" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero" Type="Int32" Nullable="false" />
+          <Property Name="Id_Bus" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK__Asientos__Id_Bus__4CA06362" FromRole="Asientos" ToRole="Buses" />
+          <NavigationProperty Name="Buses1" Relationship="Self.FK__Asientos__Id_Bus__5FB337D6" FromRole="Asientos" ToRole="Buses" />
+          <NavigationProperty Name="Boletos" Relationship="Self.FK__Boletos__Id_Asie__4F7CD00D" FromRole="Asientos" ToRole="Boletos" />
+          <NavigationProperty Name="Boletos1" Relationship="Self.FK__Boletos__Id_Asie__628FA481" FromRole="Asientos" ToRole="Boletos" />
+        </EntityType>
+        <EntityType Name="Asignaciones">
+          <Key>
+            <PropertyRef Name="Id_Asignacion" />
+          </Key>
+          <Property Name="Id_Asignacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Conductor" Type="Int32" Nullable="false" />
+          <Property Name="Id_Bus" Type="Int32" Nullable="false" />
+          <Property Name="Fecha_Asignacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Turno" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK__Asignacio__Id_Bu__4D94879B" FromRole="Asignaciones" ToRole="Buses" />
+          <NavigationProperty Name="Buses1" Relationship="Self.FK__Asignacio__Id_Bu__60A75C0F" FromRole="Asignaciones" ToRole="Buses" />
+          <NavigationProperty Name="Conductores" Relationship="Self.FK__Asignacio__Id_Co__4E88ABD4" FromRole="Asignaciones" ToRole="Conductores" />
+          <NavigationProperty Name="Conductores1" Relationship="Self.FK__Asignacio__Id_Co__619B8048" FromRole="Asignaciones" ToRole="Conductores" />
+        </EntityType>
+        <EntityType Name="Boletos">
+          <Key>
+            <PropertyRef Name="Id_Boleto" />
+          </Key>
+          <Property Name="Id_Boleto" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Viaje" Type="Int32" Nullable="false" />
+          <Property Name="Id_Pasajero" Type="Int32" Nullable="false" />
+          <Property Name="Id_Asiento" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Precio" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Fecha_Compra" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Asientos" Relationship="Self.FK__Boletos__Id_Asie__4F7CD00D" FromRole="Boletos" ToRole="Asientos" />
+          <NavigationProperty Name="Asientos1" Relationship="Self.FK__Boletos__Id_Asie__628FA481" FromRole="Boletos" ToRole="Asientos" />
+          <NavigationProperty Name="Pasajeros" Relationship="Self.FK__Boletos__Id_Pasa__5070F446" FromRole="Boletos" ToRole="Pasajeros" />
+          <NavigationProperty Name="Pasajeros1" Relationship="Self.FK__Boletos__Id_Pasa__6383C8BA" FromRole="Boletos" ToRole="Pasajeros" />
+          <NavigationProperty Name="Viajes" Relationship="Self.FK__Boletos__Id_Viaj__5165187F" FromRole="Boletos" ToRole="Viajes" />
+          <NavigationProperty Name="Viajes1" Relationship="Self.FK__Boletos__Id_Viaj__6477ECF3" FromRole="Boletos" ToRole="Viajes" />
+        </EntityType>
+        <EntityType Name="Buses">
+          <Key>
+            <PropertyRef Name="Id_Bus" />
+          </Key>
+          <Property Name="Id_Bus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Placa" Type="String" MaxLength="6" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Marca" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Modelo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Capacidad" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Asientos" Relationship="Self.FK__Asientos__Id_Bus__4CA06362" FromRole="Buses" ToRole="Asientos" />
+          <NavigationProperty Name="Asientos1" Relationship="Self.FK__Asientos__Id_Bus__5FB337D6" FromRole="Buses" ToRole="Asientos" />
+          <NavigationProperty Name="Asignaciones" Relationship="Self.FK__Asignacio__Id_Bu__4D94879B" FromRole="Buses" ToRole="Asignaciones" />
+          <NavigationProperty Name="Asignaciones1" Relationship="Self.FK__Asignacio__Id_Bu__60A75C0F" FromRole="Buses" ToRole="Asignaciones" />
+          <NavigationProperty Name="Mantenimientos" Relationship="Self.FK__Mantenimi__Id_Bu__52593CB8" FromRole="Buses" ToRole="Mantenimientos" />
+          <NavigationProperty Name="Mantenimientos1" Relationship="Self.FK__Mantenimi__Id_Bu__656C112C" FromRole="Buses" ToRole="Mantenimientos" />
+          <NavigationProperty Name="Viajes" Relationship="Self.FK__Viajes__Id_Bus__534D60F1" FromRole="Buses" ToRole="Viajes" />
+          <NavigationProperty Name="Viajes1" Relationship="Self.FK__Viajes__Id_Bus__66603565" FromRole="Buses" ToRole="Viajes" />
+        </EntityType>
+        <EntityType Name="Conductores">
+          <Key>
+            <PropertyRef Name="Id_Conductor" />
+          </Key>
+          <Property Name="Id_Conductor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento_Identidad" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Licencia" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Asignaciones" Relationship="Self.FK__Asignacio__Id_Co__4E88ABD4" FromRole="Conductores" ToRole="Asignaciones" />
+          <NavigationProperty Name="Asignaciones1" Relationship="Self.FK__Asignacio__Id_Co__619B8048" FromRole="Conductores" ToRole="Asignaciones" />
+          <NavigationProperty Name="Viajes" Relationship="Self.FK__Viajes__Id_Condu__5441852A" FromRole="Conductores" ToRole="Viajes" />
+          <NavigationProperty Name="Viajes1" Relationship="Self.FK__Viajes__Id_Condu__6754599E" FromRole="Conductores" ToRole="Viajes" />
+        </EntityType>
+        <EntityType Name="Mantenimientos">
+          <Key>
+            <PropertyRef Name="Id_Mantenimiento" />
+          </Key>
+          <Property Name="Id_Mantenimiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Bus" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Costo" Type="Decimal" Precision="8" Scale="2" Nullable="false" />
+          <Property Name="EmpresaResponsable" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK__Mantenimi__Id_Bu__52593CB8" FromRole="Mantenimientos" ToRole="Buses" />
+          <NavigationProperty Name="Buses1" Relationship="Self.FK__Mantenimi__Id_Bu__656C112C" FromRole="Mantenimientos" ToRole="Buses" />
+        </EntityType>
+        <EntityType Name="Pasajeros">
+          <Key>
+            <PropertyRef Name="Id_Pasajero" />
+          </Key>
+          <Property Name="Id_Pasajero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Documento_Identidad" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Boletos" Relationship="Self.FK__Boletos__Id_Pasa__5070F446" FromRole="Pasajeros" ToRole="Boletos" />
+          <NavigationProperty Name="Boletos1" Relationship="Self.FK__Boletos__Id_Pasa__6383C8BA" FromRole="Pasajeros" ToRole="Boletos" />
+        </EntityType>
+        <EntityType Name="Rutas">
+          <Key>
+            <PropertyRef Name="Id_Ruta" />
+          </Key>
+          <Property Name="Id_Ruta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Origen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Destino" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Distancia_Km" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Duracion_Estimada" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Viajes" Relationship="Self.FK__Viajes__Id_Ruta__5535A963" FromRole="Rutas" ToRole="Viajes" />
+          <NavigationProperty Name="Viajes1" Relationship="Self.FK__Viajes__Id_Ruta__68487DD7" FromRole="Rutas" ToRole="Viajes" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Viajes">
+          <Key>
+            <PropertyRef Name="Id_Viaje" />
+          </Key>
+          <Property Name="Id_Viaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Bus" Type="Int32" Nullable="false" />
+          <Property Name="Id_Conductor" Type="Int32" Nullable="false" />
+          <Property Name="Id_Ruta" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fecha_Salida" Type="DateTime" Precision="0" />
+          <Property Name="Fecha_LLegada" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Boletos" Relationship="Self.FK__Boletos__Id_Viaj__5165187F" FromRole="Viajes" ToRole="Boletos" />
+          <NavigationProperty Name="Boletos1" Relationship="Self.FK__Boletos__Id_Viaj__6477ECF3" FromRole="Viajes" ToRole="Boletos" />
+          <NavigationProperty Name="Buses" Relationship="Self.FK__Viajes__Id_Bus__534D60F1" FromRole="Viajes" ToRole="Buses" />
+          <NavigationProperty Name="Buses1" Relationship="Self.FK__Viajes__Id_Bus__66603565" FromRole="Viajes" ToRole="Buses" />
+          <NavigationProperty Name="Conductores" Relationship="Self.FK__Viajes__Id_Condu__5441852A" FromRole="Viajes" ToRole="Conductores" />
+          <NavigationProperty Name="Conductores1" Relationship="Self.FK__Viajes__Id_Condu__6754599E" FromRole="Viajes" ToRole="Conductores" />
+          <NavigationProperty Name="Rutas" Relationship="Self.FK__Viajes__Id_Ruta__5535A963" FromRole="Viajes" ToRole="Rutas" />
+          <NavigationProperty Name="Rutas1" Relationship="Self.FK__Viajes__Id_Ruta__68487DD7" FromRole="Viajes" ToRole="Rutas" />
+        </EntityType>
+        <Association Name="FK__Asientos__Id_Bus__4CA06362">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Asientos" Type="Self.Asientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Asientos">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asientos__Id_Bus__5FB337D6">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Asientos" Type="Self.Asientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Asientos">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Asie__4F7CD00D">
+          <End Role="Asientos" Type="Self.Asientos" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asientos">
+              <PropertyRef Name="Id_Asiento" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Asiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Asie__628FA481">
+          <End Role="Asientos" Type="Self.Asientos" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asientos">
+              <PropertyRef Name="Id_Asiento" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Asiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__Id_Bu__4D94879B">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__Id_Bu__60A75C0F">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__Id_Co__4E88ABD4">
+          <End Role="Conductores" Type="Self.Conductores" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conductores">
+              <PropertyRef Name="Id_Conductor" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="Id_Conductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Asignacio__Id_Co__619B8048">
+          <End Role="Conductores" Type="Self.Conductores" Multiplicity="1" />
+          <End Role="Asignaciones" Type="Self.Asignaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conductores">
+              <PropertyRef Name="Id_Conductor" />
+            </Principal>
+            <Dependent Role="Asignaciones">
+              <PropertyRef Name="Id_Conductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Pasa__5070F446">
+          <End Role="Pasajeros" Type="Self.Pasajeros" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pasajeros">
+              <PropertyRef Name="Id_Pasajero" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Pasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Pasa__6383C8BA">
+          <End Role="Pasajeros" Type="Self.Pasajeros" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pasajeros">
+              <PropertyRef Name="Id_Pasajero" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Pasajero" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Viaj__5165187F">
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Viajes">
+              <PropertyRef Name="Id_Viaje" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Viaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Boletos__Id_Viaj__6477ECF3">
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="1" />
+          <End Role="Boletos" Type="Self.Boletos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Viajes">
+              <PropertyRef Name="Id_Viaje" />
+            </Principal>
+            <Dependent Role="Boletos">
+              <PropertyRef Name="Id_Viaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mantenimi__Id_Bu__52593CB8">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Mantenimientos" Type="Self.Mantenimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Mantenimientos">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Mantenimi__Id_Bu__656C112C">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Mantenimientos" Type="Self.Mantenimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Mantenimientos">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Bus__534D60F1">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Bus__66603565">
+          <End Role="Buses" Type="Self.Buses" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buses">
+              <PropertyRef Name="Id_Bus" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Bus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Condu__5441852A">
+          <End Role="Conductores" Type="Self.Conductores" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conductores">
+              <PropertyRef Name="Id_Conductor" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Conductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Condu__6754599E">
+          <End Role="Conductores" Type="Self.Conductores" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conductores">
+              <PropertyRef Name="Id_Conductor" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Conductor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Ruta__5535A963">
+          <End Role="Rutas" Type="Self.Rutas" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rutas">
+              <PropertyRef Name="Id_Ruta" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Viajes__Id_Ruta__68487DD7">
+          <End Role="Rutas" Type="Self.Rutas" Multiplicity="1" />
+          <End Role="Viajes" Type="Self.Viajes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rutas">
+              <PropertyRef Name="Id_Ruta" />
+            </Principal>
+            <Dependent Role="Viajes">
+              <PropertyRef Name="Id_Ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDEFEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asientos" EntityType="Self.Asientos" />
+          <EntitySet Name="Asignaciones" EntityType="Self.Asignaciones" />
+          <EntitySet Name="Boletos" EntityType="Self.Boletos" />
+          <EntitySet Name="Buses" EntityType="Self.Buses" />
+          <EntitySet Name="Conductores" EntityType="Self.Conductores" />
+          <EntitySet Name="Mantenimientos" EntityType="Self.Mantenimientos" />
+          <EntitySet Name="Pasajeros" EntityType="Self.Pasajeros" />
+          <EntitySet Name="Rutas" EntityType="Self.Rutas" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Viajes" EntityType="Self.Viajes" />
+          <AssociationSet Name="FK__Asientos__Id_Bus__4CA06362" Association="Self.FK__Asientos__Id_Bus__4CA06362">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Asientos" EntitySet="Asientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asientos__Id_Bus__5FB337D6" Association="Self.FK__Asientos__Id_Bus__5FB337D6">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Asientos" EntitySet="Asientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Asie__4F7CD00D" Association="Self.FK__Boletos__Id_Asie__4F7CD00D">
+            <End Role="Asientos" EntitySet="Asientos" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Asie__628FA481" Association="Self.FK__Boletos__Id_Asie__628FA481">
+            <End Role="Asientos" EntitySet="Asientos" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__Id_Bu__4D94879B" Association="Self.FK__Asignacio__Id_Bu__4D94879B">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__Id_Bu__60A75C0F" Association="Self.FK__Asignacio__Id_Bu__60A75C0F">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__Id_Co__4E88ABD4" Association="Self.FK__Asignacio__Id_Co__4E88ABD4">
+            <End Role="Conductores" EntitySet="Conductores" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Asignacio__Id_Co__619B8048" Association="Self.FK__Asignacio__Id_Co__619B8048">
+            <End Role="Conductores" EntitySet="Conductores" />
+            <End Role="Asignaciones" EntitySet="Asignaciones" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Pasa__5070F446" Association="Self.FK__Boletos__Id_Pasa__5070F446">
+            <End Role="Pasajeros" EntitySet="Pasajeros" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Pasa__6383C8BA" Association="Self.FK__Boletos__Id_Pasa__6383C8BA">
+            <End Role="Pasajeros" EntitySet="Pasajeros" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Viaj__5165187F" Association="Self.FK__Boletos__Id_Viaj__5165187F">
+            <End Role="Viajes" EntitySet="Viajes" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Boletos__Id_Viaj__6477ECF3" Association="Self.FK__Boletos__Id_Viaj__6477ECF3">
+            <End Role="Viajes" EntitySet="Viajes" />
+            <End Role="Boletos" EntitySet="Boletos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mantenimi__Id_Bu__52593CB8" Association="Self.FK__Mantenimi__Id_Bu__52593CB8">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Mantenimientos" EntitySet="Mantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Mantenimi__Id_Bu__656C112C" Association="Self.FK__Mantenimi__Id_Bu__656C112C">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Mantenimientos" EntitySet="Mantenimientos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Bus__534D60F1" Association="Self.FK__Viajes__Id_Bus__534D60F1">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Bus__66603565" Association="Self.FK__Viajes__Id_Bus__66603565">
+            <End Role="Buses" EntitySet="Buses" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Condu__5441852A" Association="Self.FK__Viajes__Id_Condu__5441852A">
+            <End Role="Conductores" EntitySet="Conductores" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Condu__6754599E" Association="Self.FK__Viajes__Id_Condu__6754599E">
+            <End Role="Conductores" EntitySet="Conductores" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Ruta__5535A963" Association="Self.FK__Viajes__Id_Ruta__5535A963">
+            <End Role="Rutas" EntitySet="Rutas" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Viajes__Id_Ruta__68487DD7" Association="Self.FK__Viajes__Id_Ruta__68487DD7">
+            <End Role="Rutas" EntitySet="Rutas" />
+            <End Role="Viajes" EntitySet="Viajes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AgenciaBusesModelStoreContainer" CdmEntityContainer="BDEFEntities2">
+          <EntitySetMapping Name="Asientos">
+            <EntityTypeMapping TypeName="AgenciaBusesModel.Asientos">
+              <MappingFragment StoreEntitySet="Asientos">
+                <ScalarProperty Name="Id_Asiento" ColumnName="Id_Asiento" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Id_Bus" ColumnName="Id_Bus" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asignaciones">
+            <EntityTypeMapping TypeName="AgenciaBusesModel.Asignaciones">
+              <MappingFragment StoreEntitySet="Asignaciones">
+                <ScalarProperty Name="Id_Asignacion" ColumnName="Id_Asignacion" />
+                <ScalarProperty Name="Id_Conductor" ColumnName="Id_Conductor" />
+                <ScalarProperty Name="Id_Bus" ColumnName="Id_Bus" />
+                <ScalarProperty Name="Fecha_Asignacion" ColumnName="Fecha_Asignacion" />
+                <ScalarProperty Name="Turno" ColumnName="Turno" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Boletos">
+            <EntityTypeMapping TypeName="AgenciaBusesModel.Boletos">
+              <MappingFragment StoreEntitySet="Boletos">
+                <ScalarProperty Name="Id_Boleto" ColumnName="Id_Boleto" />
+                <ScalarProperty Name="Id_Viaje" ColumnName="Id_Viaje" />
+                <ScalarProperty Name="Id_Pasajero" ColumnName="Id_Pasajero" />
+                <ScalarProperty Name="Id_Asiento" ColumnName="Id_Asiento" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Fecha_Compra" ColumnName="Fecha_Compra" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buses">
+            <EntityTypeMapping TypeName="AgenciaBusesModel.Buses">
+              <MappingFragment StoreEntitySet="Buses">
+                <ScalarProperty Name="Id_Bus" ColumnName="Id_Bus" />
+                <ScalarProperty Name="Placa" ColumnName="Placa" />
+                <ScalarProperty Name="Marca" ColumnName="Marca" />
+                <ScalarProperty Name="Modelo" ColumnName="Modelo" />
+                <ScalarProperty Name="Capacidad" ColumnName="Capacidad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conductores">
+            <EntityTypeMapping TypeName="AgenciaBusesModel.Conductores">
+              <MappingFragment StoreEntitySet="Conductores">
+                <ScalarProperty Name="Id_Conductor" ColumnName="Id_Conductor" />
+                <ScalarProperty Name="Documento_Identidad" ColumnName="Documento_Identidad" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Licencia" ColumnName="Licencia" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mantenimientos">
+            <EntityTypeMapping TypeName="AgenciaBusesModel.Mantenimientos">
+              <MappingFragment StoreEntitySet="Mantenimientos">
+                <ScalarProperty Name="Id_Mantenimiento" ColumnName="Id_Mantenimiento" />
+                <ScalarProperty Name="Id_Bus" ColumnName="Id_Bus" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="EmpresaResponsable" ColumnName="EmpresaResponsable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pasajeros">
+            <EntityTypeMapping TypeName="AgenciaBusesModel.Pasajeros">
+              <MappingFragment StoreEntitySet="Pasajeros">
+                <ScalarProperty Name="Id_Pasajero" ColumnName="Id_Pasajero" />
+                <ScalarProperty Name="Documento_Identidad" ColumnName="Documento_Identidad" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rutas">
+            <EntityTypeMapping TypeName="AgenciaBusesModel.Rutas">
+              <MappingFragment StoreEntitySet="Rutas">
+                <ScalarProperty Name="Id_Ruta" ColumnName="Id_Ruta" />
+                <ScalarProperty Name="Origen" ColumnName="Origen" />
+                <ScalarProperty Name="Destino" ColumnName="Destino" />
+                <ScalarProperty Name="Distancia_Km" ColumnName="Distancia_Km" />
+                <ScalarProperty Name="Duracion_Estimada" ColumnName="Duracion_Estimada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AgenciaBusesModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Viajes">
+            <EntityTypeMapping TypeName="AgenciaBusesModel.Viajes">
+              <MappingFragment StoreEntitySet="Viajes">
+                <ScalarProperty Name="Id_Viaje" ColumnName="Id_Viaje" />
+                <ScalarProperty Name="Id_Bus" ColumnName="Id_Bus" />
+                <ScalarProperty Name="Id_Conductor" ColumnName="Id_Conductor" />
+                <ScalarProperty Name="Id_Ruta" ColumnName="Id_Ruta" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Fecha_Salida" ColumnName="Fecha_Salida" />
+                <ScalarProperty Name="Fecha_LLegada" ColumnName="Fecha_LLegada" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

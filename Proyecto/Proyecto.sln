@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Datos", "Datos\Datos.csproj", "{F98924CF-7685-4285-B3D2-4CBCCD20EA0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Negocio", "Negocio\Negocio.csproj", "{52AA072B-DE9B-48EA-A833-83D1B9B4164B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentacion", "Presentacion1\Presentacion.csproj", "{5E1D8345-9D7D-4A15-A5E7-0BBD34DA8EAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F98924CF-7685-4285-B3D2-4CBCCD20EA0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F98924CF-7685-4285-B3D2-4CBCCD20EA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F98924CF-7685-4285-B3D2-4CBCCD20EA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F98924CF-7685-4285-B3D2-4CBCCD20EA0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52AA072B-DE9B-48EA-A833-83D1B9B4164B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52AA072B-DE9B-48EA-A833-83D1B9B4164B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52AA072B-DE9B-48EA-A833-83D1B9B4164B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52AA072B-DE9B-48EA-A833-83D1B9B4164B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E1D8345-9D7D-4A15-A5E7-0BBD34DA8EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E1D8345-9D7D-4A15-A5E7-0BBD34DA8EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E1D8345-9D7D-4A15-A5E7-0BBD34DA8EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E1D8345-9D7D-4A15-A5E7-0BBD34DA8EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B904FB7-A453-430A-966D-6BF91D8DC9B9}
+	EndGlobalSection
+EndGlobal

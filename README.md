@@ -1,4 +1,5 @@
 Sistema de Gestión de Buses
+
 Este proyecto es una aplicación de escritorio desarrollada en C# con Windows Forms, diseñada para automatizar y optimizar la gestión operativa de una empresa de transporte terrestre.
 Proyecto grupal desarrollado como parte de nuestra formación en Ingeniería de Sistemas de Información.
 
